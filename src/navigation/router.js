@@ -4,6 +4,8 @@ import LoginScreen from "../screens/LoginScreen";
 import MyAccountScreen from "../screens/MyAccountScreen";
 import FeedScreen from "../screens/FeedScreen";
 import GrandpaDetail from "../screens/GrandpaDetail";
+import UserPersonalData from "../screens/UserPersonalData";
+import IntroduceData from "../screens/IntroduceData";
 import Settings from "../screens/Settings";
 import { Icon } from "react-native-elements";
 
@@ -19,6 +21,12 @@ export const FeedNavigator = StackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.name.first.toUpperCase()} ${navigation.state.params.name.last.toUpperCase()}`
     })
+  },
+  userPersonalData: {
+    screen: UserPersonalData
+  },
+  introduceData: {
+    screen: IntroduceData
   }
 });
 

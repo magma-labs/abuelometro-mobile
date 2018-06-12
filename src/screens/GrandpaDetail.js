@@ -47,6 +47,11 @@ export default class GrandpaDetail extends Component {
       <ScrollView>
         <Tile
           imageSrc={{ uri: picture.large }}
+          onPress={() => {
+            this.props.navigation.navigate("userPersonalData", {
+              ...this.props.navigation.state.params
+            });
+          }}
           featured
           title={`${name.first.toUpperCase()} ${name.last.toUpperCase()}`}
         />
@@ -57,6 +62,7 @@ export default class GrandpaDetail extends Component {
             rightTitle={"120"}
             roundAvatar
             avatar={{ uri: picture.thumbnail }}
+            onPress={() => this.props.navigation.navigate("introduceData")}
           />
         </List>
 
