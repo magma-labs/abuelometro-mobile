@@ -1,0 +1,5 @@
+dependencies: \
+  /Users/luisarmandodv/Documents/GitHub/abuelometro/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTMultiplicationAnimatedNode.m \
+  /Users/luisarmandodv/Documents/GitHub/abuelometro/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTMultiplicationAnimatedNode.h \
+  /Users/luisarmandodv/Documents/GitHub/abuelometro/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTValueAnimatedNode.h \
+  /Users/luisarmandodv/Documents/GitHub/abuelometro/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAnimatedNode.h
