@@ -74,9 +74,7 @@ export default class GrandpaDetail extends Component {
             <Button
               style={{ marginTop: 20 }}
               title="Generar gráfica"
-              onPress={() => {
-                this.generateData();
-              }}
+              onPress={this.generateData}
             >
               <Text>Generar gráfica</Text>
             </Button>
