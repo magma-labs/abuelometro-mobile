@@ -7,21 +7,16 @@ import moment from "moment";
 export default class GrandpaDetail extends Component {
   constructor(props) {
     super(props);
-    this.generateData = this.generateData.bind(this);
     this.state = {
-      data: []
+      data: [],
+      hideChartButton: false
     };
   }
 
-  ComponentDidMount() {
-    this.generateData();
-  }
-
-  generateData() {
+  generateData = () => {
     var data = [];
     var data2 = [];
     var data3 = [];
-    var pieData = [];
     var startDate = moment();
     for (var i = 0; i < 10; i++) {
       startDate.add(1, "days");
@@ -39,18 +34,11 @@ export default class GrandpaDetail extends Component {
       });
     }
 
-    for (let i = 0; i < 5; i++) {
-      pieData.push({
-        value: Math.round(Math.random() * 500),
-        label: "Marketing"
-      });
-    }
-
     this.setState({
       data: [{ seriesName: "test2", data: data2, color: "#0e95de" }],
-      pieData: pieData
+      hideChartButton: true
     });
-  }
+  };
 
   render() {
     const { picture, name } = this.props.navigation.state.params;
@@ -74,13 +62,19 @@ export default class GrandpaDetail extends Component {
 
         <View style={{ padding: 20 }}>
           <PureChart type={"line"} data={this.state.data} />
-          <Button
-            style={{ marginTop: 20 }}
-            title="Generate chart data"
-            onPress={this.generateData}
-          >
-            <Text>Generate chart data</Text>
-          </Button>
+          {this.state.hideChartButton ? (
+            <View />
+          ) : (
+            <Button
+              style={{ marginTop: 20 }}
+              title="Generar gráfica"
+              onPress={() => {
+                this.generateData();
+              }}
+            >
+              <Text>Generar gráfica</Text>
+            </Button>
+          )}
         </View>
       </ScrollView>
     );
