@@ -67,6 +67,14 @@ export default class GrandpaDetail extends Component {
         </List>
 
         <View style={{ padding: 20 }}>
+          <Button
+            style={{ marginTop: 20 }}
+            title="Ver historial"
+            onPress={() => this.props.navigation.navigate("visualizeDataList")}
+          >
+            <Text>Ver historial</Text>
+          </Button>
+
           <PureChart type={"line"} data={this.state.data} />
           {this.state.hideChartButton ? (
             <View />

@@ -7,6 +7,7 @@ import GrandpaDetail from "../screens/GrandpaDetail";
 import UserPersonalData from "../screens/UserPersonalData";
 import IntroduceData from "../screens/IntroduceData";
 import Settings from "../screens/Settings";
+import VisualizeDataList from "../screens/VisualizeDataList";
 import { Icon } from "react-native-elements";
 
 export const FeedNavigator = StackNavigator({
@@ -27,6 +28,9 @@ export const FeedNavigator = StackNavigator({
   },
   introduceData: {
     screen: IntroduceData
+  },
+  visualizeDataList: {
+    screen: VisualizeDataList
   }
 });
 
