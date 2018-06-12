@@ -15,35 +15,31 @@ export default class MyAccoutScreen extends Component {
           imageSrc={{ uri: this.props.picture.large }}
           featured
           title={`${this.props.name.first.toUpperCase()} ${this.props.name.last.toUpperCase()}`}
-          caption={this.props.email}
-        />
-
-        <Button
-          title="Settings"
-          buttonStyle={{ marginTop: 20 }}
-          onPress={this.handleSettingsPress}
         />
 
         <List>
-          <ListItem title="Email" rightTitle={this.props.email} hideChevron />
-          <ListItem title="Phone" rightTitle={this.props.phone} hideChevron />
+          <ListItem
+            title="Correo electronico"
+            rightTitle={this.props.email}
+            hideChevron
+          />
+          <ListItem
+            title="Teléfono"
+            rightTitle={this.props.phone}
+            hideChevron
+          />
         </List>
 
         <List>
           <ListItem
-            title="Username"
+            title="Nombre de usuario"
             rightTitle={this.props.login.username}
             hideChevron
           />
         </List>
 
         <List>
-          <ListItem title="Birthday" rightTitle={this.props.dob} hideChevron />
-          <ListItem
-            title="City"
-            rightTitle={this.props.location.city}
-            hideChevron
-          />
+          <ListItem title="Cerrar Sesión" rightIcon={{ name: "cancel" }} />
         </List>
       </ScrollView>
     );
