@@ -58,8 +58,8 @@ export default class GrandpaDetail extends Component {
 
         <List>
           <ListItem
-            title="Presion Arterial"
-            rightTitle={"120"}
+            title="Glucosa"
+            rightTitle={"120 mg/dl"}
             roundAvatar
             avatar={{ uri: picture.thumbnail }}
             onPress={() => this.props.navigation.navigate("introduceData")}
