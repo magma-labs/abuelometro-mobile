@@ -41,19 +41,19 @@ export default class GrandpaDetail extends Component {
   };
 
   render() {
-    const { picture, name } = this.props.navigation.state.params;
+    const { name, first_name } = this.props.navigation.state.params;
 
     return (
       <ScrollView>
         <Tile
-          imageSrc={{ uri: picture.large }}
+          imageSrc={require("../assets/icons/abuelo.png")}
           onPress={() => {
             this.props.navigation.navigate("userPersonalData", {
               ...this.props.navigation.state.params
             });
           }}
           featured
-          title={`${name.first.toUpperCase()} ${name.last.toUpperCase()}`}
+          title={`${name.toUpperCase()} ${first_name.toUpperCase()}`}
         />
 
         <List>
@@ -61,7 +61,8 @@ export default class GrandpaDetail extends Component {
             title="Glucosa"
             rightTitle={"120 mg/dl"}
             roundAvatar
-            avatar={{ uri: picture.thumbnail }}
+            avatar={{}}
+            avatarContainerStyle={{ backgroundColor: "green" }}
             onPress={() => this.props.navigation.navigate("introduceData")}
           />
         </List>

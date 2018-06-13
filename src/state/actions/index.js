@@ -73,3 +73,37 @@ export function postLoginData(email, password) {
     }
   };
 }
+
+export function postToGetGranpaList() {
+  return async dispatch => {
+    const { id } = getState().reducers;
+
+    dispatch(setIsAppLoading(true));
+
+    try {
+      const response = await axios({
+        method: "post",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        url: "https://...",
+        data: {
+          id: id
+        }
+      });
+
+      if (response.data.status === "successful") {
+        dispatch(isCodeIncorrect(false));
+        dispatch(SaveUserData({ ...response }));
+      } else if (response.data.status === "error") {
+        dispatch(isCodeIncorrect(true));
+      }
+
+      dispatch(loginPostHasError(false));
+      dispatch(setIsAppLoading(false));
+    } catch (error) {
+      dispatch(loginPostHasError(true));
+      dispatch(setIsAppLoading(false));
+    }
+  };
+}
