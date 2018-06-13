@@ -2,8 +2,16 @@ import {
   SET_LOGIN_DATA,
   VERIFY_CODE_POST_HAS_ERROR,
   LOGIN_POST_HAS_ERROR,
-  SET_IS_APP_LOADING
+  SET_IS_APP_LOADING,
+  SET_GLUCOSE_STATUS
 } from "../types";
+
+export function setGlucoseStatus(status) {
+  return {
+    type: SET_GLUCOSE_STATUS,
+    payload: status
+  };
+}
 
 export function SaveUserData(data) {
   return {

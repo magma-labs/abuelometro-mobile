@@ -3,8 +3,11 @@ import { ScrollView, View, Button, Text } from "react-native";
 import { Tile, List, ListItem } from "react-native-elements";
 import PureChart from "react-native-pure-chart";
 import moment from "moment";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import {} from "../state/actions/index.js";
 
-export default class GrandpaDetail extends Component {
+class GrandpaDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -93,3 +96,19 @@ export default class GrandpaDetail extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { glucoseStatus } = state.reducers;
+  return {
+    glucoseStatus
+  };
+}
+
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({}, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(GrandpaDetail);

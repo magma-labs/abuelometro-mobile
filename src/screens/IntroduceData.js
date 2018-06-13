@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Image, StyleSheet, ScrollView, View } from "react-native";
 import NumericInput, { calcSize } from "react-native-numeric-input";
 import { Button, Text } from "react-native-elements";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { setGlucoseStatus } from "../state/actions/index.js";
 
-export default class IntroduceData extends Component {
+class IntroduceData extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,6 +45,22 @@ export default class IntroduceData extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { glucoseStatus } = state.reducers;
+  return {
+    glucoseStatus
+  };
+}
+
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({ setGlucoseStatus: setGlucoseStatus }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(IntroduceData);
 
 const styles = StyleSheet.create({
   container: {
