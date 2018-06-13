@@ -5,17 +5,43 @@ import {
   View,
   StatusBar,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Alert
 } from "react-native";
+import { cuidador, familiar } from "../utils/newdata";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { postLoginData } from "../state/actions/index.js";
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: ""
     };
   }
+
+  sendData = () => {
+    if (
+      this.state.email == cuidador.email &&
+      this.state.password == cuidador.password
+    ) {
+      this.props.navigation.navigate("Tabs");
+    } else if (
+      this.state.email == familiar.email &&
+      this.state.password == familiar.password
+    ) {
+      this.props.navigation.navigate("RelativeFlow");
+    } else {
+      Alert.alert(
+        "Los datos del Usuario o Contraseña son incorrectos",
+        "Por favor introduce datos que sean validos",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+    }
+  };
 
   render() {
     return (
@@ -27,7 +53,7 @@ export default class LoginForm extends Component {
           placeholderTextColor="'rgba(255,255,255,0.2)'"
           returnKeyType="next"
           onSubmitEditing={() => this.passwordInput.focus()}
-          onChangeText={username => this.setState({ username })}
+          onChangeText={email => this.setState({ email })}
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
@@ -46,9 +72,7 @@ export default class LoginForm extends Component {
 
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => {
-            this.props.navigation.navigate("Tabs");
-          }}
+          onPress={this.sendData}
         >
           <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
@@ -56,6 +80,24 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      postLoginData: postLoginData
+    },
+    dispatch
+  );
+}
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(LoginForm);
 
 const styles = StyleSheet.create({
   container: {

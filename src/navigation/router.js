@@ -55,6 +55,18 @@ export const Tabs = createBottomTabNavigator({
   }
 });
 
+export const RelativeFlow = StackNavigator({
+  grandpaDetail: {
+    screen: GrandpaDetail
+  },
+  userPersonalData: {
+    screen: UserPersonalData
+  },
+  visualizeDataList: {
+    screen: VisualizeDataList
+  }
+});
+
 export const SettingsStack = StackNavigator({
   Settings: {
     screen: Settings,
@@ -71,6 +83,9 @@ export const Root = StackNavigator(
     },
     Tabs: {
       screen: Tabs
+    },
+    RelativeFlow: {
+      screen: RelativeFlow
     },
     Settings: {
       screen: SettingsStack
