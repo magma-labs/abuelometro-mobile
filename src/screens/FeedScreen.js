@@ -2,18 +2,24 @@ import React, { Component } from "react";
 import { ScrollView } from "react-native";
 import { List, ListItem } from "react-native-elements";
 import { allgrandpas } from "../utils/newdata";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { postToGetGranpaList } from "../state/actions/index.js";
 
-export default class FeedScreen extends Component {
+class FeedScreen extends Component {
+  async componentWillMount() {
+    await this.props.postToGetGranpaList();
+  }
   render() {
     return (
       <ScrollView>
         <List>
-          {allgrandpas.map(grandpa => (
+          {this.props.GrandpaArray.map(grandpa => (
             <ListItem
               key={grandpa.id}
               roundAvatar
               avatar={require("../assets/icons/abuelo.png")}
-              title={`${grandpa.first_name.toUpperCase()} ${grandpa.second_name.toUpperCase()}`}
+              title={`${grandpa.first_name.toUpperCase()} ${grandpa.last_name.toUpperCase()}`}
               onPress={() =>
                 this.props.navigation.navigate("grandpaDetail", { ...grandpa })
               }
@@ -24,3 +30,23 @@ export default class FeedScreen extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { glucoseStatus, GrandpaArray } = state.reducers;
+  return {
+    glucoseStatus,
+    GrandpaArray
+  };
+}
+
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators(
+    { postToGetGranpaList: postToGetGranpaList },
+    dispatch
+  );
+}
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(FeedScreen);

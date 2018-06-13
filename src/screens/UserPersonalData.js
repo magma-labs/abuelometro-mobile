@@ -7,7 +7,7 @@ export default class UserPersonalData extends Component {
     const {
       name,
       first_name,
-      second_name,
+      last_name,
       blood_type,
       birthdate,
       weight,
@@ -18,7 +18,7 @@ export default class UserPersonalData extends Component {
         <FormLabel>Nombre:</FormLabel>
         <FormInput
           editable={false}
-          placeholder={`${name.toUpperCase()} ${first_name.toUpperCase()}  ${second_name.toUpperCase()}`}
+          placeholder={`${name.toUpperCase()} ${first_name.toUpperCase()}  ${last_name.toUpperCase()}`}
         />
         <FormLabel>Altura:</FormLabel>
         <FormInput editable={false} placeholder={`${height.toUpperCase()}`} />
