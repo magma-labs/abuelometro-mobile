@@ -5,6 +5,9 @@ import {
   SET_IS_APP_LOADING,
   SET_GLUCOSE_STATUS
 } from "../types";
+import axios from "axios";
+axios.defaults.headers.common["Content-Type"] = "application/json";
+axios.defaults.headers.common["Cache-Control"] = "no-cache";
 
 export function setGlucoseStatus(status) {
   return {
@@ -16,15 +19,7 @@ export function setGlucoseStatus(status) {
 export function SaveUserData(data) {
   return {
     type: SET_LOGIN_DATA,
-    id: data.id,
-    status: data.status,
-    email: data.email,
-    password: data.password,
-    name: data.name,
-    first_name: data.first_name,
-    second_name: data.second_name,
-    phone: data.phone,
-    role: data.role
+    payload: data
   };
 }
 
@@ -84,26 +79,13 @@ export function postLoginData(email, password) {
 
 export function postToGetGranpaList() {
   return async dispatch => {
-    const { id } = getState().reducers;
-
     dispatch(setIsAppLoading(true));
-
     try {
-      const response = await axios({
-        method: "post",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        url: "https://...",
-        data: {
-          id: id
-        }
-      });
-
-      if (response.data.status === "successful") {
+      const response = await axios("http://localhost:3000/api/v1/elders");
+      if (response.status === 200) {
         dispatch(isCodeIncorrect(false));
-        dispatch(SaveUserData({ ...response }));
-      } else if (response.data.status === "error") {
+        dispatch(SaveUserData(response.data));
+      } else {
         dispatch(isCodeIncorrect(true));
       }
 
