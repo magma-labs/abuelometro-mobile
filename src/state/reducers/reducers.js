@@ -14,7 +14,11 @@ const INITIAL_STATE = {
   first_name: undefined,
   second_name: undefined,
   phone: undefined,
-  role: undefined
+  role: undefined,
+
+  authenticationPostHasError: false,
+  isAuthenticationLoading: false,
+  isCodeIncorrect: false
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -33,6 +37,12 @@ export default function(state = INITIAL_STATE, action) {
         role: action.role
       };
     }
+    case LOGIN_POST_HAS_ERROR:
+      return { ...state, authenticationPostHasError: action.payload };
+    case VERIFY_CODE_POST_HAS_ERROR:
+      return { ...state, isCodeIncorrect: action.payload };
+    case SET_IS_APP_LOADING:
+      return { ...state, isAuthenticationLoading: action.payload };
     default:
       return state;
   }
