@@ -22,7 +22,7 @@ class IntroduceData extends Component {
           style={styles.diabetesIcon}
         />
         <NumericInput
-          value={this.state.value}
+          initValue={parseInt(this.props.glucoseStatus)}
           onChange={value => this.setState({ value: value })}
           totalWidth={calcSize(400)}
           totalHeight={calcSize(150)}
@@ -40,6 +40,10 @@ class IntroduceData extends Component {
           title="Guardar"
           backgroundColor="#6C819B"
           buttonStyle={{ marginTop: 50 }}
+          onPress={() => {
+            this.props.setGlucoseStatus(this.state.value);
+            this.props.navigation.goBack();
+          }}
         />
       </ScrollView>
     );

@@ -62,10 +62,16 @@ class GrandpaDetail extends Component {
         <List>
           <ListItem
             title="Glucosa"
-            rightTitle={"120 mg/dl"}
+            rightTitle={this.props.glucoseStatus + " mg/dl"}
             roundAvatar
             avatar={{}}
-            avatarContainerStyle={{ backgroundColor: "green" }}
+            avatarContainerStyle={
+              this.props.glucoseStatus <= 115
+                ? { backgroundColor: "green" }
+                : this.props.glucoseStatus <= 180
+                  ? { backgroundColor: "yellow" }
+                  : { backgroundColor: "red" }
+            }
             onPress={() => this.props.navigation.navigate("introduceData")}
           />
         </List>
