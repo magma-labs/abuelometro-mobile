@@ -56,6 +56,7 @@ class GrandpaDetail extends Component {
             });
           }}
           featured
+          height={200}
           title={`${name.toUpperCase()} ${first_name.toUpperCase()}`}
         />
 
