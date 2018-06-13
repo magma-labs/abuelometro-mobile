@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Image, StyleSheet, ScrollView, View } from "react-native";
 import NumericInput, { calcSize } from "react-native-numeric-input";
 import { Button, Text } from "react-native-elements";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { setGlucoseStatus } from "../state/actions/index.js";
 
-export default class IntroduceData extends Component {
+class IntroduceData extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +22,7 @@ export default class IntroduceData extends Component {
           style={styles.diabetesIcon}
         />
         <NumericInput
-          value={this.state.value}
+          initValue={parseInt(this.props.glucoseStatus)}
           onChange={value => this.setState({ value: value })}
           totalWidth={calcSize(400)}
           totalHeight={calcSize(150)}
@@ -37,11 +40,31 @@ export default class IntroduceData extends Component {
           title="Guardar"
           backgroundColor="#6C819B"
           buttonStyle={{ marginTop: 50 }}
+          onPress={() => {
+            this.props.setGlucoseStatus(this.state.value);
+            this.props.navigation.goBack();
+          }}
         />
       </ScrollView>
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { glucoseStatus } = state.reducers;
+  return {
+    glucoseStatus
+  };
+}
+
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({ setGlucoseStatus: setGlucoseStatus }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(IntroduceData);
 
 const styles = StyleSheet.create({
   container: {

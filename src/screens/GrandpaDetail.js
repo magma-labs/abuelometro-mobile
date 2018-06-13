@@ -3,8 +3,11 @@ import { ScrollView, View, Button, Text } from "react-native";
 import { Tile, List, ListItem } from "react-native-elements";
 import PureChart from "react-native-pure-chart";
 import moment from "moment";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import {} from "../state/actions/index.js";
 
-export default class GrandpaDetail extends Component {
+class GrandpaDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,16 +56,23 @@ export default class GrandpaDetail extends Component {
             });
           }}
           featured
+          height={200}
           title={`${name.toUpperCase()} ${first_name.toUpperCase()}`}
         />
 
         <List>
           <ListItem
             title="Glucosa"
-            rightTitle={"120 mg/dl"}
+            rightTitle={this.props.glucoseStatus + " mg/dl"}
             roundAvatar
             avatar={{}}
-            avatarContainerStyle={{ backgroundColor: "green" }}
+            avatarContainerStyle={
+              this.props.glucoseStatus <= 115
+                ? { backgroundColor: "green" }
+                : this.props.glucoseStatus <= 180
+                  ? { backgroundColor: "yellow" }
+                  : { backgroundColor: "red" }
+            }
             onPress={() => this.props.navigation.navigate("introduceData")}
           />
         </List>
@@ -93,3 +103,19 @@ export default class GrandpaDetail extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { glucoseStatus } = state.reducers;
+  return {
+    glucoseStatus
+  };
+}
+
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({}, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(GrandpaDetail);
